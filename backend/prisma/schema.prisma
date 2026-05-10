@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  role      String   @default("CLINIC")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  claims    Claim[]  @relation("ClinicClaims")
+}
+
+model Claim {
+  id                   String    @id @default(cuid())
+  patientName          String
+  patientSpecies       String    @default("dog")
+  patientBreed         String?
+  ownerName            String
+  ownerEmail           String
+  treatmentDate        DateTime?
+  diagnosis            String
+  treatmentDescription String
+  amount               Float
+  approvedAmount       Float?
+  vetName              String
+  clinicName           String
+  status               String    @default("PENDING")
+  blockchainTxId       String?
+  reviewNotes          String?
+  reviewedAt           DateTime?
+  resolvedAt           DateTime?
+  clinicId             String
+  clinic               User      @relation("ClinicClaims", fields: [clinicId], references: [id])
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+}

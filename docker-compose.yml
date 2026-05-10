@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: vetsource_db
+    environment:
+      POSTGRES_USER: vetsource
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: vetsource_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vetsource"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: vetsource_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Uncomment for full stack local run
+  # backend:
+  #   build: ./backend
+  #   ports: ["3001:3001"]
+  #   depends_on: [postgres, redis]
+  #   env_file: .env
+
+  # frontend:
+  #   build: ./frontend
+  #   ports: ["3000:3000"]
+  #   depends_on: [backend]
+  #   env_file: .env
+
+volumes:
+  postgres_data:
+  redis_data:
