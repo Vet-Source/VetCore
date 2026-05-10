@@ -2,8 +2,9 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
-const API = "https://vetcore-production.up.railway.app/api";
+const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -37,12 +38,8 @@ export default function LoginPage() {
     <div style={{ minHeight: "100vh", background: "#374822", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "system-ui, sans-serif" }}>
       <div style={{ width: "100%", maxWidth: 420, padding: "0 20px" }}>
         <div style={{ textAlign: "center", marginBottom: 32 }}>
-          <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 64, height: 64, background: "#95c11f", borderRadius: 16, fontSize: 30, marginBottom: 16 }}>ðŸ¾</div>
-          <div style={{ fontWeight: 800, fontSize: 28, color: "#fff", letterSpacing: "-0.5px" }}>
-            <span style={{ color: "#95c11f" }}>VET</span>
-            <span style={{ background: "#95c11f", color: "#374822", borderRadius: 6, padding: "0 6px", marginLeft: 2 }}>core</span>
-          </div>
-          <div style={{ color: "#779451", fontSize: 13, marginTop: 6, letterSpacing: "0.05em", textTransform: "uppercase" }}>Claims Platform</div>
+          <Image src="/logo-primary.png" alt="VETcore" width={220} height={150} style={{ objectFit: "contain" }} />
+          <div style={{ color: "#779451", fontSize: 13, marginTop: 8, letterSpacing: "0.05em", textTransform: "uppercase" }}>Claims Platform</div>
         </div>
 
         <div style={{ background: "#fff", borderRadius: 16, padding: 32, boxShadow: "0 20px 60px rgba(0,0,0,0.3)" }}>
@@ -58,7 +55,7 @@ export default function LoginPage() {
             </div>
             <div style={{ marginBottom: 24 }}>
               <label style={{ fontSize: 13, fontWeight: 600, color: "#374822", display: "block", marginBottom: 6 }}>Password</label>
-              <input type="password" value={password} onChange={e => setPassword(e.target.value)} required placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
+              <input type="password" value={password} onChange={e => setPassword(e.target.value)} required placeholder="••••••••"
                 style={{ width: "100%", padding: "11px 14px", border: "1.5px solid #d1d5db", borderRadius: 8, fontSize: 14, boxSizing: "border-box" as any, outline: "none" }} />
             </div>
             <button type="submit" disabled={loading} style={{ width: "100%", padding: "12px", background: loading ? "#779451" : "#95c11f", color: "#374822", border: "none", borderRadius: 8, fontSize: 15, fontWeight: 700, cursor: loading ? "not-allowed" : "pointer" }}>
@@ -71,10 +68,7 @@ export default function LoginPage() {
             <Link href="/auth/register" style={{ color: "#95c11f", fontWeight: 600, textDecoration: "none" }}>Create one</Link>
           </div>
         </div>
-
-        <div style={{ textAlign: "center", marginTop: 20, fontSize: 12, color: "#779451" }}>
-          Secured by blockchain technology
-        </div>
+        <div style={{ textAlign: "center", marginTop: 20, fontSize: 12, color: "#779451" }}>Secured by blockchain technology</div>
       </div>
     </div>
   );
