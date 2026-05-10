@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-const API = "http://localhost:3001/api";
+const API = "https://vetcore-production.up.railway.app/api";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -37,7 +37,7 @@ export default function LoginPage() {
     <div style={{ minHeight: "100vh", background: "#374822", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "system-ui, sans-serif" }}>
       <div style={{ width: "100%", maxWidth: 420, padding: "0 20px" }}>
         <div style={{ textAlign: "center", marginBottom: 32 }}>
-          <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 64, height: 64, background: "#95c11f", borderRadius: 16, fontSize: 30, marginBottom: 16 }}>🐾</div>
+          <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 64, height: 64, background: "#95c11f", borderRadius: 16, fontSize: 30, marginBottom: 16 }}>ðŸ¾</div>
           <div style={{ fontWeight: 800, fontSize: 28, color: "#fff", letterSpacing: "-0.5px" }}>
             <span style={{ color: "#95c11f" }}>VET</span>
             <span style={{ background: "#95c11f", color: "#374822", borderRadius: 6, padding: "0 6px", marginLeft: 2 }}>core</span>
@@ -58,7 +58,7 @@ export default function LoginPage() {
             </div>
             <div style={{ marginBottom: 24 }}>
               <label style={{ fontSize: 13, fontWeight: 600, color: "#374822", display: "block", marginBottom: 6 }}>Password</label>
-              <input type="password" value={password} onChange={e => setPassword(e.target.value)} required placeholder="••••••••"
+              <input type="password" value={password} onChange={e => setPassword(e.target.value)} required placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
                 style={{ width: "100%", padding: "11px 14px", border: "1.5px solid #d1d5db", borderRadius: 8, fontSize: 14, boxSizing: "border-box" as any, outline: "none" }} />
             </div>
             <button type="submit" disabled={loading} style={{ width: "100%", padding: "12px", background: loading ? "#779451" : "#95c11f", color: "#374822", border: "none", borderRadius: 8, fontSize: 15, fontWeight: 700, cursor: loading ? "not-allowed" : "pointer" }}>

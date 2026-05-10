@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 
-const API = "http://localhost:3001/api";
+const API = "https://vetcore-production.up.railway.app/api";
 
 export default function NotificationsPage() {
   const [notifications, setNotifications] = useState<any[]>([]);
@@ -23,7 +23,7 @@ export default function NotificationsPage() {
         <div style={{ textAlign:"center", padding:48, color:"#9ca3af" }}>Loading...</div>
       ) : notifications.length === 0 ? (
         <div style={{ background:"#fff", borderRadius:12, border:"1px solid #e8eaed", padding:48, textAlign:"center" }}>
-          <div style={{ fontSize:40, marginBottom:12 }}>🔔</div>
+          <div style={{ fontSize:40, marginBottom:12 }}>ðŸ””</div>
           <div style={{ fontSize:16, fontWeight:600, color:"#374151" }}>No notifications yet</div>
           <div style={{ fontSize:14, color:"#9ca3af", marginTop:4 }}>You'll be notified here when claim statuses change</div>
         </div>
@@ -31,7 +31,7 @@ export default function NotificationsPage() {
         <div style={{ display:"flex", flexDirection:"column", gap:12 }}>
           {notifications.map((n: any) => (
             <div key={n.id} style={{ background:"#fff", borderRadius:10, border:"1px solid #e8eaed", padding:"16px 20px", display:"flex", gap:14, alignItems:"flex-start" }}>
-              <div style={{ fontSize:22, flexShrink:0 }}>{n.type === "APPROVED" ? "✅" : n.type === "REJECTED" ? "❌" : "📋"}</div>
+              <div style={{ fontSize:22, flexShrink:0 }}>{n.type === "APPROVED" ? "âœ…" : n.type === "REJECTED" ? "âŒ" : "ðŸ“‹"}</div>
               <div style={{ flex:1 }}>
                 <div style={{ fontSize:14, fontWeight:600, color:"#111827" }}>{n.title || "Claim Update"}</div>
                 <div style={{ fontSize:13, color:"#6b7280", marginTop:2 }}>{n.message}</div>

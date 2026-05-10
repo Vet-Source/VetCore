@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 
-const API = "http://localhost:3001/api";
+const API = "https://vetcore-production.up.railway.app/api";
 
 export default function AuditLogPage() {
   const [logs, setLogs] = useState<any[]>([]);
@@ -23,7 +23,7 @@ export default function AuditLogPage() {
           <div style={{ padding:48, textAlign:"center", color:"#9ca3af" }}>Loading audit log...</div>
         ) : logs.length === 0 ? (
           <div style={{ padding:48, textAlign:"center" }}>
-            <div style={{ fontSize:36, marginBottom:12 }}>📜</div>
+            <div style={{ fontSize:36, marginBottom:12 }}>ðŸ“œ</div>
             <div style={{ fontSize:15, color:"#6b7280" }}>No audit entries yet</div>
             <div style={{ fontSize:13, color:"#9ca3af", marginTop:4 }}>All claim activity will be recorded here</div>
           </div>
@@ -41,7 +41,7 @@ export default function AuditLogPage() {
                   <td style={{ padding:"12px 18px", fontSize:13, fontWeight:600, color:"#111827" }}>{log.action}</td>
                   <td style={{ padding:"12px 18px", fontSize:12, color:"#6b7280", fontFamily:"monospace" }}>{log.entityId?.slice(0,10)}...</td>
                   <td style={{ padding:"12px 18px", fontSize:13, color:"#374151" }}>{log.userId}</td>
-                  <td style={{ padding:"12px 18px", fontSize:11, color:"#4d9e6e", fontFamily:"monospace" }}>{log.txHash || "—"}</td>
+                  <td style={{ padding:"12px 18px", fontSize:11, color:"#4d9e6e", fontFamily:"monospace" }}>{log.txHash || "â€”"}</td>
                 </tr>
               ))}
             </tbody>

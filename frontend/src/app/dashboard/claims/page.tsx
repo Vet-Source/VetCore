@@ -1,8 +1,8 @@
-﻿"use client";
+"use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-const API = "http://localhost:3001/api";
+const API = "https://vetcore-production.up.railway.app/api";
 
 function StatusBadge({ status }: { status: string }) {
   const map: any = {
