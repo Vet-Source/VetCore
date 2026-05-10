@@ -22,12 +22,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   }
 
   const navItems = [
-    { href: "/dashboard", label: "Overview", icon: "📊", roles: ["CLINIC","INSURER","ADMIN"] },
-    { href: "/dashboard/claims", label: "Claims", icon: "📋", roles: ["CLINIC","INSURER","ADMIN"] },
-    { href: "/dashboard/submit", label: "Submit Claim", icon: "➕", roles: ["CLINIC","ADMIN"] },
-    { href: "/dashboard/notifications", label: "Notifications", icon: "🔔", roles: ["CLINIC","INSURER","ADMIN"] },
-    { href: "/dashboard/audit", label: "Audit Log", icon: "📜", roles: ["INSURER","ADMIN"] },
-    { href: "/dashboard/admin", label: "Admin Panel", icon: "🛡️", roles: ["ADMIN"] },
+    { href: "/dashboard", label: "Overview", icon: "ðŸ“Š", roles: ["CLINIC","INSURER","ADMIN"] },
+    { href: "/dashboard/claims", label: "Claims", icon: "ðŸ“‹", roles: ["CLINIC","INSURER","ADMIN"] },
+    { href: "/dashboard/submit", label: "Submit Claim", icon: "âž•", roles: ["CLINIC","ADMIN"] },
+    { href: "/dashboard/notifications", label: "Notifications", icon: "ðŸ””", roles: ["CLINIC","INSURER","ADMIN"] },
+    { href: "/dashboard/audit", label: "Audit Log", icon: "ðŸ“œ", roles: ["INSURER","ADMIN"] },
+    { href: "/dashboard/admin", label: "Admin Panel", icon: "ðŸ›¡ï¸", roles: ["ADMIN"] },
   ];
 
   const visibleNav = navItems.filter(item => !user || item.roles.includes(user.role));
@@ -37,7 +37,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <aside style={{ width: 250, background: "#374822", color: "#fff", display: "flex", flexDirection: "column", padding: "24px 0", flexShrink: 0 }}>
         <div style={{ padding: "0 24px 24px", borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <div style={{ width: 44, height: 44, background: "#95c11f", borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22 }}>🐾</div>
+            <div style={{ width: 44, height: 44, background: "#95c11f", borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22 }}>ðŸ¾</div>
             <div>
               <div style={{ fontWeight: 800, fontSize: 18, color: "#fff", letterSpacing: "-0.5px" }}>
                 <span style={{ color: "#95c11f" }}>VET</span>

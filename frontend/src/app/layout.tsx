@@ -1,25 +1,19 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import { Toaster } from 'sonner';
-import { QueryProvider } from '@/lib/QueryProvider';
-import './globals.css';
-
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+import type { Metadata } from "next";
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: 'VET-SOURCE — Veterinary Insurance Platform',
-  description: 'Blockchain-powered veterinary insurance claims processing',
+  title: "VETcore - Blockchain Claims Platform",
+  description: "Veterinary insurance claims powered by blockchain",
+  icons: {
+    icon: "/favicon.png",
+    apple: "/logo-icon-192.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="vs-halo text-ink antialiased min-h-screen">
-        <QueryProvider>
-          {children}
-          <Toaster richColors position="top-right" />
-        </QueryProvider>
-      </body>
+    <html lang="en">
+      <body style={{ margin: 0, padding: 0 }}>{children}</body>
     </html>
   );
 }
