@@ -18,6 +18,9 @@ export async function authenticate(req: any, res: Response, next: NextFunction) 
     if (!user) {
       return res.status(401).json({ success: false, error: "User not found" });
     }
+    if (user.suspended) {
+      return res.status(403).json({ success: false, error: "Your account has been suspended. Please contact admin." });
+    }
     req.user = { id: user.id, email: user.email, name: user.name, role: user.role };
     next();
   } catch (err: any) {

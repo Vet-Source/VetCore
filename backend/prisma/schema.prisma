@@ -8,14 +8,15 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  password  String
-  name      String?
-  role      String   @default("CLINIC")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  claims    Claim[]  @relation("ClinicClaims")
+  id          String   @id @default(cuid())
+  email       String   @unique
+  password    String
+  name        String?
+  role        String   @default("CLINIC")
+  suspended   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  claims      Claim[]  @relation("ClinicClaims")
 }
 
 model Claim {

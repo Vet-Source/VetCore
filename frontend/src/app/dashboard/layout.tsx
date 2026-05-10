@@ -22,12 +22,15 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   }
 
   const navItems = [
-    { href: "/dashboard", label: "Overview", icon: "📊" },
-    { href: "/dashboard/claims", label: "Claims", icon: "📋" },
-    { href: "/dashboard/submit", label: "Submit Claim", icon: "➕" },
-    { href: "/dashboard/notifications", label: "Notifications", icon: "🔔" },
-    { href: "/dashboard/audit", label: "Audit Log", icon: "📜" },
+    { href: "/dashboard", label: "Overview", icon: "📊", roles: ["CLINIC","INSURER","ADMIN"] },
+    { href: "/dashboard/claims", label: "Claims", icon: "📋", roles: ["CLINIC","INSURER","ADMIN"] },
+    { href: "/dashboard/submit", label: "Submit Claim", icon: "➕", roles: ["CLINIC","ADMIN"] },
+    { href: "/dashboard/notifications", label: "Notifications", icon: "🔔", roles: ["CLINIC","INSURER","ADMIN"] },
+    { href: "/dashboard/audit", label: "Audit Log", icon: "📜", roles: ["INSURER","ADMIN"] },
+    { href: "/dashboard/admin", label: "Admin Panel", icon: "🛡️", roles: ["ADMIN"] },
   ];
+
+  const visibleNav = navItems.filter(item => !user || item.roles.includes(user.role));
 
   return (
     <div style={{ display: "flex", minHeight: "100vh", fontFamily: "system-ui, sans-serif" }}>
@@ -45,18 +48,18 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </div>
         </div>
         <nav style={{ flex: 1, padding: "16px 12px" }}>
-          {navItems.map(item => (
+          {visibleNav.map(item => (
             <Link key={item.href} href={item.href} style={{
               display: "flex", alignItems: "center", gap: 10, padding: "10px 12px",
               borderRadius: 8, marginBottom: 4, textDecoration: "none",
               background: pathname === item.href ? "rgba(149,193,31,0.2)" : "transparent",
               borderLeft: pathname === item.href ? "3px solid #95c11f" : "3px solid transparent",
-              color: pathname === item.href ? "#95c11f" : "rgba(255,255,255,0.7)",
+              color: pathname === item.href ? "#95c11f" : item.href === "/dashboard/admin" ? "#fbbf24" : "rgba(255,255,255,0.7)",
               fontSize: 14, fontWeight: pathname === item.href ? 600 : 400,
-              transition: "all 0.15s"
             }}>
               <span style={{ fontSize: 16 }}>{item.icon}</span>
               {item.label}
+              {item.href === "/dashboard/admin" && <span style={{ marginLeft: "auto", fontSize: 10, background: "#dc2626", color: "#fff", padding: "1px 6px", borderRadius: 10 }}>ADMIN</span>}
             </Link>
           ))}
         </nav>
