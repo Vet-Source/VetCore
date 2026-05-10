@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
@@ -54,7 +54,7 @@ export default function DashboardPage() {
     <div style={{ padding: 32 }}>
       <div style={{ marginBottom: 28 }}>
         <h1 style={{ fontSize: 24, fontWeight: 700, color: "#374822", margin: 0 }}>
-          Welcome back{user?.name ? `, ${user.name}` : ""}
+          Welcome Back{user?.name ? `, ${user.name}` : ""}
         </h1>
         <p style={{ color: "#779451", fontSize: 14, marginTop: 4 }}>VETcore Blockchain Claims Platform</p>
       </div>
@@ -73,7 +73,7 @@ export default function DashboardPage() {
           <div style={{ padding: 40, textAlign: "center", color: "#9ca3af" }}>Loading claims...</div>
         ) : claims.length === 0 ? (
           <div style={{ padding: 48, textAlign: "center" }}>
-            <div style={{ fontSize: 40, marginBottom: 12 }}>📋</div>
+            <div style={{ fontSize: 40, marginBottom: 12 }}>ðŸ“‹</div>
             <div style={{ fontSize: 16, fontWeight: 600, color: "#374151" }}>No claims yet</div>
             <div style={{ fontSize: 14, color: "#9ca3af", marginTop: 4 }}>Submit your first insurance claim to get started</div>
             <Link href="/dashboard/submit" style={{ display: "inline-block", marginTop: 16, padding: "10px 20px", background: "#95c11f", color: "#374822", borderRadius: 8, textDecoration: "none", fontSize: 14, fontWeight: 600 }}>Submit Claim</Link>
