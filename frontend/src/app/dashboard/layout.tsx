@@ -8,13 +8,42 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const router = useRouter();
   const pathname = usePathname();
   const [user, setUser] = useState<any>(null);
+  const [checking, setChecking] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("vs_token");
     const userData = localStorage.getItem("vs_user");
     if (!token) { router.push("/auth/login"); return; }
-    if (userData) setUser(JSON.parse(userData));
+    if (userData) {
+      const parsed = JSON.parse(userData);
+      setUser(parsed);
+      // Check status from API to get latest
+      fetch((process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api") + "/auth/me", {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then(r => r.json())
+      .then(d => {
+        if (d.success) {
+          // Update local storage with latest user data
+          localStorage.setItem("vs_user", JSON.stringify(d.data));
+          setUser(d.data);
+        }
+        setChecking(false);
+      })
+      .catch(() => setChecking(false));
+    } else {
+      setChecking(false);
+    }
   }, []);
+
+  useEffect(() => {
+    if (!checking && user) {
+      // Redirect pending users to pending page unless already there
+      if (user.status === "PENDING" && pathname !== "/dashboard/pending") {
+        router.push("/dashboard/pending");
+      }
+    }
+  }, [checking, user, pathname]);
 
   function logout() {
     localStorage.removeItem("vs_token");
@@ -44,6 +73,23 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   }
 
   const visibleNav = navItems.filter(item => !user || item.roles.includes(user.role));
+
+  // Show pending page without sidebar
+  if (pathname === "/dashboard/pending") {
+    return <>{children}</>;
+  }
+
+  // Show loading while checking
+  if (checking) {
+    return (
+      <div style={{ minHeight: "100vh", background: "#f5f6f8", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div style={{ textAlign: "center" }}>
+          <Image src="/logo-primary-sm.png" alt="VETcore" width={120} height={82} style={{ objectFit: "contain", marginBottom: 16 }} />
+          <div style={{ fontSize: 14, color: "#779451" }}>Loading...</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={{ display: "flex", minHeight: "100vh", fontFamily: "system-ui, sans-serif" }}>
